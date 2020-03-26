@@ -7,9 +7,9 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="302" Width="581">
     <Grid>
-        <ComboBox x:Name="combo_artist" HorizontalAlignment="Left" Margin="73,10,0,0" VerticalAlignment="Top" Width="120" Height="22"/>
+        <ComboBox x:Name="combo_artist" HorizontalAlignment="Left" Margin="73,10,0,0" VerticalAlignment="Top" Width="120" Height="22" SelectionChanged="combo_artist_SelectionChanged"/>
         <ComboBox x:Name="combo_title" HorizontalAlignment="Left" Margin="73,37,0,0" VerticalAlignment="Top" Width="120" Height="22"/>
-        <ComboBox x:Name="combo_release" HorizontalAlignment="Left" Margin="256,10,0,0" VerticalAlignment="Top" Width="120" Height="22"/>
+        <ComboBox x:Name="combo_release" HorizontalAlignment="Left" Margin="256,10,0,0" VerticalAlignment="Top" Width="120" Height="22" SelectionChanged="combo_release_SelectionChanged"/>
         <ComboBox x:Name="combo_side" HorizontalAlignment="Left" Margin="256,37,0,0" VerticalAlignment="Top" Width="120" Height="22"/>
         <TextBlock HorizontalAlignment="Left" Margin="10,12,0,0" Text="Artist:" TextWrapping="Wrap" VerticalAlignment="Top"/>
         <TextBlock HorizontalAlignment="Left" Margin="10,40,0,0" Text="Track title:" TextWrapping="Wrap" VerticalAlignment="Top"/>
@@ -26,6 +26,7 @@
             </DataGrid.Columns>
         </DataGrid>
         <Button x:Name="button_relation" Content="Add Relation" HorizontalAlignment="Left" Margin="386,10,0,0" VerticalAlignment="Top" Height="22" Width="85"/>
+        <Button x:Name="button_reset" Content="Reset" HorizontalAlignment="Left" Margin="386,37,0,0" VerticalAlignment="Top" Height="22" Width="85" Click="button_reset_Click"/>
 
     </Grid>
 </Window>
