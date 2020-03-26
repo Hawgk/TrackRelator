@@ -10,7 +10,7 @@
         <ComboBox x:Name="combo_artist" HorizontalAlignment="Left" Margin="73,37,0,0" VerticalAlignment="Top" Width="120" Height="22" SelectionChanged="combo_artist_SelectionChanged"/>
         <ComboBox x:Name="combo_title" HorizontalAlignment="Left" Margin="73,10,0,0" VerticalAlignment="Top" Width="120" Height="22" SelectionChanged="combo_title_SelectionChanged"/>
         <ComboBox x:Name="combo_release" HorizontalAlignment="Left" Margin="256,37,0,0" VerticalAlignment="Top" Width="120" Height="22" SelectionChanged="combo_release_SelectionChanged"/>
-        <ComboBox x:Name="combo_side" HorizontalAlignment="Left" Margin="73,64,0,0" VerticalAlignment="Top" Width="120" Height="22"/>
+        <ComboBox x:Name="combo_side" HorizontalAlignment="Left" Margin="73,64,0,0" VerticalAlignment="Top" Width="120" Height="22" SelectionChanged="combo_side_SelectionChanged"/>
         <TextBlock HorizontalAlignment="Left" Margin="10,39,0,0" Text="Artist:" TextWrapping="Wrap" VerticalAlignment="Top"/>
         <TextBlock HorizontalAlignment="Left" Margin="10,13,0,0" Text="Track title:" TextWrapping="Wrap" VerticalAlignment="Top"/>
         <TextBlock HorizontalAlignment="Left" Margin="203,39,0,0" Text="Release:" TextWrapping="Wrap" VerticalAlignment="Top"/>

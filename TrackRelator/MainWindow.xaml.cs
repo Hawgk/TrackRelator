@@ -117,6 +117,7 @@ namespace TrackRelator {
             if (!reset) {
                 if (!track_select) current_release = (Release)combo_release.SelectedItem;
                 if (combo_release.SelectedIndex != -1) {
+                    combo_side.IsEnabled = true;
                     list_combo_label = new List<string>();
                     list_combo_label.Add(current_release.Label);
                     if (!track_select) combo_label.SelectedItem = current_release.Label;
@@ -164,7 +165,32 @@ namespace TrackRelator {
         }
 
         private void combo_label_SelectionChanged(object sender, SelectionChangedEventArgs e) {
+            if (!reset && !track_select) {
+                current_label = (string)combo_label.SelectedItem;
+                combo_release.ItemsSource = list_release.Where(release => release.Label == current_label);
+                combo_title.ItemsSource = list_tracks.Where(track => track.Release.Label == current_label);
+                var list_combo_artists = new List<string>();
+                foreach (Track tr in combo_title.ItemsSource) {
+                    list_combo_artists.Add(tr.Artist);
+                }
+                combo_artist.ItemsSource = list_combo_artists;
+            }
+        }
 
+        private void combo_side_SelectionChanged(object sender, SelectionChangedEventArgs e) {
+            if (!reset && !track_select) {
+                var current_side = (string)combo_side.SelectedItem;
+                if (combo_title.SelectedIndex == -1 || combo_artist.SelectedIndex == -1) {
+                    combo_title.ItemsSource = current_release.Tracks.Where(track => track.Side == current_side);
+                    combo_title.SelectedIndex = 0;
+                    var list_combo_artists = new List<string>();
+                    foreach (Track tr in current_release.Tracks) {
+                        if (tr.Side == current_side) list_combo_artists.Add(tr.Artist);
+                    }
+                    combo_artist.ItemsSource = list_combo_artists;
+                    combo_artist.SelectedIndex = 0;
+                }
+            }
         }
     }
 }
