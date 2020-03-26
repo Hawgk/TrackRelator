@@ -5,19 +5,19 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:TrackRelator"
         mc:Ignorable="d"
-        Title="MainWindow" Height="302" Width="581">
+        Title="MainWindow" Height="410" Width="596">
     <Grid>
-        <ComboBox x:Name="combo_artist" HorizontalAlignment="Left" Margin="73,10,0,0" VerticalAlignment="Top" Width="120" Height="22" SelectionChanged="combo_artist_SelectionChanged"/>
-        <ComboBox x:Name="combo_title" HorizontalAlignment="Left" Margin="73,37,0,0" VerticalAlignment="Top" Width="120" Height="22"/>
-        <ComboBox x:Name="combo_release" HorizontalAlignment="Left" Margin="256,10,0,0" VerticalAlignment="Top" Width="120" Height="22" SelectionChanged="combo_release_SelectionChanged"/>
-        <ComboBox x:Name="combo_side" HorizontalAlignment="Left" Margin="256,37,0,0" VerticalAlignment="Top" Width="120" Height="22"/>
-        <TextBlock HorizontalAlignment="Left" Margin="10,12,0,0" Text="Artist:" TextWrapping="Wrap" VerticalAlignment="Top"/>
-        <TextBlock HorizontalAlignment="Left" Margin="10,40,0,0" Text="Track title:" TextWrapping="Wrap" VerticalAlignment="Top"/>
-        <TextBlock HorizontalAlignment="Left" Margin="203,12,0,0" Text="Release:" TextWrapping="Wrap" VerticalAlignment="Top"/>
-        <TextBlock HorizontalAlignment="Left" Margin="203,40,0,0" Text="Side:" TextWrapping="Wrap" VerticalAlignment="Top"/>
+        <ComboBox x:Name="combo_artist" HorizontalAlignment="Left" Margin="73,37,0,0" VerticalAlignment="Top" Width="120" Height="22" SelectionChanged="combo_artist_SelectionChanged"/>
+        <ComboBox x:Name="combo_title" HorizontalAlignment="Left" Margin="73,10,0,0" VerticalAlignment="Top" Width="120" Height="22" SelectionChanged="combo_title_SelectionChanged"/>
+        <ComboBox x:Name="combo_release" HorizontalAlignment="Left" Margin="256,37,0,0" VerticalAlignment="Top" Width="120" Height="22" SelectionChanged="combo_release_SelectionChanged"/>
+        <ComboBox x:Name="combo_side" HorizontalAlignment="Left" Margin="73,64,0,0" VerticalAlignment="Top" Width="120" Height="22"/>
+        <TextBlock HorizontalAlignment="Left" Margin="10,39,0,0" Text="Artist:" TextWrapping="Wrap" VerticalAlignment="Top"/>
+        <TextBlock HorizontalAlignment="Left" Margin="10,13,0,0" Text="Track title:" TextWrapping="Wrap" VerticalAlignment="Top"/>
+        <TextBlock HorizontalAlignment="Left" Margin="203,39,0,0" Text="Release:" TextWrapping="Wrap" VerticalAlignment="Top"/>
+        <TextBlock HorizontalAlignment="Left" Margin="10,67,0,0" Text="Side:" TextWrapping="Wrap" VerticalAlignment="Top"/>
         <Button x:Name="button_add_release" Content="Add Release" HorizontalAlignment="Left" Margin="481,10,0,0" VerticalAlignment="Top" Height="22" Width="90"/>
         <Button x:Name="button_delete_release" Content="Delete Release" HorizontalAlignment="Left" Margin="481,37,0,0" VerticalAlignment="Top" Height="22" Width="90"/>
-        <DataGrid x:Name="data_grid" Margin="0,69,0,0">
+        <DataGrid x:Name="data_grid" Margin="0,96,0,0">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Release"/>
                 <DataGridTextColumn Header="Side"/>
@@ -27,6 +27,8 @@
         </DataGrid>
         <Button x:Name="button_relation" Content="Add Relation" HorizontalAlignment="Left" Margin="386,10,0,0" VerticalAlignment="Top" Height="22" Width="85"/>
         <Button x:Name="button_reset" Content="Reset" HorizontalAlignment="Left" Margin="386,37,0,0" VerticalAlignment="Top" Height="22" Width="85" Click="button_reset_Click"/>
+        <ComboBox x:Name="combo_label" HorizontalAlignment="Left" Margin="256,10,0,0" VerticalAlignment="Top" Width="120" Height="22" SelectionChanged="combo_label_SelectionChanged"/>
+        <TextBlock HorizontalAlignment="Left" Margin="203,12,0,0" Text="Label:" TextWrapping="Wrap" VerticalAlignment="Top"/>
 
     </Grid>
 </Window>

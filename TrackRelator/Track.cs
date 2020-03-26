@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace TrackRelator {
+﻿namespace TrackRelator {
     class Track {
         public string Artist { get; set; }
         public string Title { get; set; }
