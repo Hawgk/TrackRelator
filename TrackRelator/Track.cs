@@ -6,9 +6,6 @@ namespace TrackRelator {
         public string Artist { get; set; }
         public Release Release { get; set; }
         public string Side { get; set; }
-        public List<Relation> Relations { get; set; }
-        public Track() {
-            Relations = new List<Relation>();
-        }
+        public Relation Relation { get; set; }
     }
 }

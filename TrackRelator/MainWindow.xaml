@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:TrackRelator"
         mc:Ignorable="d"
-        Title="MainWindow" Height="410" Width="906" Icon="/icon.png">
+        Title="TrackRelator" Height="410" Width="906" Icon="/icon.png">
     <Grid>
         <ComboBox x:Name="combo_artist" HorizontalAlignment="Left" Margin="73,37,0,0" VerticalAlignment="Top" Width="300" Height="22" SelectionChanged="combo_artist_SelectionChanged"/>
         <ComboBox x:Name="combo_title" HorizontalAlignment="Left" Margin="73,10,0,0" VerticalAlignment="Top" Width="300" Height="22" SelectionChanged="combo_title_SelectionChanged"/>
@@ -17,7 +17,14 @@
         <TextBlock HorizontalAlignment="Left" Margin="10,67,0,0" Text="Side:" TextWrapping="Wrap" VerticalAlignment="Top"/>
         <Button x:Name="button_add_release" Content="Add Release" HorizontalAlignment="Left" Margin="791,10,0,0" VerticalAlignment="Top" Height="22" Width="90"/>
         <Button x:Name="button_delete_release" Content="Delete Release" HorizontalAlignment="Left" Margin="791,37,0,0" VerticalAlignment="Top" Height="22" Width="90"/>
-        <DataGrid x:Name="data_grid" Margin="0,96,0,0"/>
+        <DataGrid x:Name="data_grid" AutoGenerateColumns="False" Margin="0,96,0,0" IsReadOnly="True" CanUserAddRows="False" CanUserDeleteRows="False" CanUserResizeColumns="False" CanUserResizeRows="False" CanUserReorderColumns="False">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Title" Binding="{Binding Title}"/>
+                <DataGridTextColumn Header="Artist" Binding="{Binding Artist}"/>
+                <DataGridTextColumn Header="Release" Binding="{Binding Release.Name}"/>
+                <DataGridTextColumn Header="Side" Binding="{Binding Side}"/>
+            </DataGrid.Columns>
+        </DataGrid>
         <Button x:Name="button_relation" Content="Add Relation" HorizontalAlignment="Left" Margin="696,10,0,0" VerticalAlignment="Top" Height="22" Width="85"/>
         <Button x:Name="button_reset" Content="Reset" HorizontalAlignment="Left" Margin="696,37,0,0" VerticalAlignment="Top" Height="22" Width="85" Click="button_reset_Click"/>
         <ComboBox x:Name="combo_label" HorizontalAlignment="Left" Margin="436,10,0,0" VerticalAlignment="Top" Width="250" Height="22" SelectionChanged="combo_label_SelectionChanged"/>

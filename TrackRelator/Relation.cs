@@ -1,10 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System.Collections.Generic;
 
 namespace TrackRelator {
-    public struct Relation {
+    public class Relation {
         public Track First_track { get; set; }
-        public Track Second_track { get; set; }
+        public List<Track> Second_tracks { get; set; }
+        public Relation() {
+            Second_tracks = new List<Track>();
+        }
     }
 }
