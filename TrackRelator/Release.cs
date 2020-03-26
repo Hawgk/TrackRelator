@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 
 namespace TrackRelator {
-    class Release {
+    public class Release {
         public string Name { get; set; }
         public string Label { get; set; }
         public List<Track> Tracks { get; set; }

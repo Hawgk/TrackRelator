@@ -17,6 +17,8 @@ namespace TrackRelator {
         private List<Track> list_tracks;
         private List<string> list_labels;
         private List<string> list_combo_label;
+        private List<Relation> current_relations;
+        private List<Relation> list_relations;
         public MainWindow() {
             reset = true;
             list_release = new List<Release>();
@@ -25,9 +27,20 @@ namespace TrackRelator {
             list_artists = new List<string>();
             list_labels = new List<string>();
             list_combo_label = new List<string>();
+            current_relations = new List<Relation>();
+            list_relations = new List<Relation>();
+
             LoadReleases();
+            LoadRelations();
             InitializeComponent();
             FillCombos();
+
+            var lst = new List<Track>();
+            foreach (Relation rel in current_relations) {
+                lst.Add(rel.Second_track);
+            }
+            data_grid.ItemsSource = lst;
+
             reset = false;
         }
         private void LoadReleases() {
@@ -66,6 +79,19 @@ namespace TrackRelator {
                     if (add) list_artists.Add(tr.Artist);
                 }
             }
+        }
+        private void LoadRelations() {
+            Relation rel;
+            for (int j = 0; j < 4; j += 2) {
+                for (int i = 1; i < 11; i++) {
+                    rel = new Relation();
+                    rel.First_track = list_tracks.ToArray()[j];
+                    rel.Second_track = list_tracks.ToArray()[i];
+                    list_relations.Add(rel);
+                    list_tracks.ToArray()[j].Relations.Add(rel);
+                }
+            }
+            current_relations = list_tracks.ToArray()[0].Relations;
         }
         private void FillCombos() {
             combo_artist.ItemsSource = list_artists;
@@ -121,14 +147,22 @@ namespace TrackRelator {
                     list_combo_label = new List<string>();
                     list_combo_label.Add(current_release.Label);
                     if (!track_select) combo_label.SelectedItem = current_release.Label;
-                    if (combo_artist.SelectedIndex == -1 && combo_title.SelectedIndex == -1) {
-                        combo_side.IsEnabled = true;
-                        combo_side.ItemsSource = current_release.GetSides();
-                        combo_artist.ItemsSource = current_release.GetArtists();
-                        if (!track_select) combo_title.ItemsSource = list_tracks.Where(track => track.Release == current_release);
-                    } else if (combo_artist.SelectedIndex != -1) {
-                        combo_side.IsEnabled = false;
-                        if (!track_select) combo_title.ItemsSource = list_tracks.Where(track => track.Release == current_release && track.Artist == current_artist);
+                    if (combo_artist.SelectedIndex != -1) {
+                        if (!track_select) {
+                            combo_side.IsEnabled = true;
+                            if (combo_title.SelectedIndex == -1) {
+                                combo_side.ItemsSource = current_release.GetSides();
+                                combo_artist.ItemsSource = current_release.GetArtists();
+                                if (!track_select) combo_title.ItemsSource = list_tracks.Where(track => track.Release == current_release);
+                            } else {
+                                combo_title.ItemsSource = list_tracks.Where(track => track.Release == current_release && track.Artist == current_artist);
+                                var list_combo_side = new List<string>();
+                                foreach (Track track in combo_title.ItemsSource) {
+                                    list_combo_side.Add(track.Side);
+                                }
+                                combo_side.ItemsSource = list_combo_side;
+                            }
+                        }
                     }
                 } else {
                     combo_side.IsEnabled = false;
