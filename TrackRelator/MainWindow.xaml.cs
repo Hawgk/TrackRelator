@@ -13,16 +13,17 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace TrackRelator
-{
-    /// <summary>
-    /// Interaction logic for MainWindow.xaml
-    /// </summary>
-    public partial class MainWindow : Window
-    {
-        public MainWindow()
-        {
+namespace TrackRelator {
+    public partial class MainWindow : Window {
+        private Release current_release;
+        private Track current_track;
+        private List<Release> list_release;
+        public MainWindow() {
+            LoadReleases();
             InitializeComponent();
+        }
+        private void LoadReleases() {
+
         }
     }
 }
