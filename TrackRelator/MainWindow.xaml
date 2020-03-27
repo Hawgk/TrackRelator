@@ -17,12 +17,12 @@
         <TextBlock HorizontalAlignment="Left" Margin="10,67,0,0" Text="Side:" TextWrapping="Wrap" VerticalAlignment="Top"/>
         <Button x:Name="button_add_release" Content="Add Release" HorizontalAlignment="Left" Margin="791,10,0,0" VerticalAlignment="Top" Height="22" Width="90"/>
         <Button x:Name="button_delete_release" Content="Delete Release" HorizontalAlignment="Left" Margin="791,37,0,0" VerticalAlignment="Top" Height="22" Width="90"/>
-        <DataGrid x:Name="data_grid" AutoGenerateColumns="False" Margin="0,96,0,0" IsReadOnly="True" CanUserAddRows="False" CanUserDeleteRows="False" CanUserResizeColumns="False" CanUserResizeRows="False" CanUserReorderColumns="False">
+        <DataGrid x:Name="data_grid" AutoGenerateColumns="False" Margin="0,96,0,0" ColumnWidth="*" IsReadOnly="True" CanUserAddRows="False" CanUserDeleteRows="False" CanUserResizeColumns="False" CanUserResizeRows="False" CanUserReorderColumns="False" FontWeight="Normal" FontStyle="Normal">
             <DataGrid.Columns>
-                <DataGridTextColumn Header="Title" Binding="{Binding Title}"/>
-                <DataGridTextColumn Header="Artist" Binding="{Binding Artist}"/>
-                <DataGridTextColumn Header="Release" Binding="{Binding Release.Name}"/>
-                <DataGridTextColumn Header="Side" Binding="{Binding Side}"/>
+                <DataGridTextColumn Header="Title" Binding="{Binding Title}" Width=".45*"/>
+                <DataGridTextColumn Header="Artist" Binding="{Binding Artist}" Width=".3*"/>
+                <DataGridTextColumn Header="Release" Binding="{Binding Release.Name}" Width=".1*"/>
+                <DataGridTextColumn Header="Side" Binding="{Binding Side}" Width=".05*"/>
             </DataGrid.Columns>
         </DataGrid>
         <Button x:Name="button_relation" Content="Add Relation" HorizontalAlignment="Left" Margin="696,10,0,0" VerticalAlignment="Top" Height="22" Width="85"/>
