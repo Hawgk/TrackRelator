@@ -2,9 +2,10 @@
 <Relations>
 	<Relation>
 		<First_track>10</First_track>
-		<Second_tracks>
-			<Track>12</Track>
-			<Track>33</Track>
-		</Second_tracks>
+		<Second_track>12</Second_track>
+	</Relation>
+	<Relation>
+		<First_track>10</First_track>
+		<Second_track>33</Second_track>
 	</Relation>
 </Relations>

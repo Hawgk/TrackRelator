@@ -11,14 +11,13 @@ namespace TrackRelator {
         private Track current_track;
         private string current_artist;
         private string current_label;
-        private Relation current_relation;
 
         private List<Track> related_tracks;
         private List<string> list_artists;
         private List<Release> list_releases;
         private List<Track> list_tracks;
         private List<string> list_labels;
-        private List<Relation> list_relations;
+        private List<Relation> current_relations;
 
         private List<string> list_combo_artists;
         private List<Track> list_combo_tracks;
@@ -30,8 +29,8 @@ namespace TrackRelator {
             list_tracks = new List<Track>();
             list_artists = new List<string>();
             list_labels = new List<string>();
-            list_relations = new List<Relation>();
             related_tracks = new List<Track>();
+            current_relations = new List<Relation>();
 
             list_combo_tracks = new List<Track>();
             list_combo_artists = new List<string>();
@@ -83,7 +82,7 @@ namespace TrackRelator {
         }
         private void LoadRelations() {
             Import import = new Import("Relations");
-            list_relations = import.GetRelations(list_tracks);
+            import.GetRelations(list_tracks);
         }
         private void FillCombos() {
             combo_artist.ItemsSource = list_combo_artists;
@@ -122,8 +121,9 @@ namespace TrackRelator {
             current_release = null;
             current_track = null;
             current_label = null;
-            current_relation = null;
+            current_relations = null;
             related_tracks = null;
+            data_grid.ItemsSource = related_tracks;
             ResetLists();
             FillCombos();
             combo_artist.SelectedIndex = -1;
@@ -172,8 +172,13 @@ namespace TrackRelator {
                 track_select = true;
 
                 current_track = (Track)combo_title.SelectedItem;
-                current_relation = current_track.Relation;
-                related_tracks = current_relation.Second_tracks;
+                current_relations = current_track.Relations;
+                if (current_relations != null) {
+                    related_tracks = new List<Track>();
+                    foreach (Relation relation in current_relations) {
+                        related_tracks.Add(relation.Second_track);
+                    }
+                }
 
                 if (current_track != null) {
                     current_release = current_track.Release;
@@ -192,12 +197,12 @@ namespace TrackRelator {
                     list_combo_labels.Add(current_release.Label);
                     combo_label.ItemsSource = list_combo_labels;
                     combo_label.SelectedItem = current_release.Label;
-                    current_relation = current_track.Relation;
-                    if (current_relation != null) {
-                        related_tracks = current_relation.Second_tracks;
+                    current_relations = current_track.Relations;
+                    if (current_relations != null) {
                         data_grid.ItemsSource = related_tracks;
                     } else {
-                        data_grid.ItemsSource = null;
+                        related_tracks = new List<Track>();
+                        data_grid.ItemsSource = related_tracks;
                     }
                 }
             }
