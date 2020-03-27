@@ -14,16 +14,22 @@ namespace TrackRelator {
             List<Release> releases = new List<Release>();
             IEnumerable<XElement> contents = doc.Descendants("Release");
             foreach (var content in contents) {
-                Release rel = new Release();
-                rel.Name = content.Element("Name").Value;
-                rel.Label = content.Element("Label").Value;
+                Release rel = new Release {
+                    Name = content.Element("Name").Value,
+                    Label = content.Element("Label").Value
+                };
                 IEnumerable<XElement> tracks = content.Descendants("Track");
+                int i = 0;
                 foreach (var track in tracks) {
-                    Track tr = new Track();
-                    tr.Title = track.Element("Title").Value;
-                    tr.Artist = track.Element("Artist").Value;
-                    tr.Side = track.Element("Side").Value;
+                    Track tr = new Track {
+                        Id = i,
+                        Title = track.Element("Title").Value,
+                        Artist = track.Element("Artist").Value,
+                        Side = track.Element("Side").Value,
+                        Release = rel
+                    };
                     rel.Tracks.Add(tr);
+                    i++;
                 }
                 releases.Add(rel);
             }
