@@ -46,7 +46,7 @@ namespace TrackRelator {
             reset = false;
         }
         private void LoadReleases() {
-            Import import = new Import();
+            Import import = new Import("Releases");
             list_releases = import.GetReleases();
             foreach (Release rel in list_releases) {
                 foreach (Track tr in rel.Tracks) {
@@ -80,51 +80,10 @@ namespace TrackRelator {
                 }
             }
             ResetLists();
-            /*for (int j = 0; j < 20; j++) {
-                var rel = new Release();
-                for (int i = 0; i < 4; i++) {
-                    var tr = new Track {
-                        Artist = "Artist" + (j + 1),
-                        Title = "Release " + (j + 1) + " Title" + (i + 1),
-                        Side = (i < 2) ? ("A" + (i + 1)) : ("B" + (i - 1)),
-                        Release = rel
-                    };
-                    rel.AddTrack(tr);
-                }
-                rel.Name = "RLS" + (j + 1);
-                rel.Label = "Label" + (j + 1);
-                list_labels.Add(rel.Label);
-                list_releases.Add(rel);
-            }
-            foreach (Track tr in list_tracks) {
-                if (list_artists.Count == 0) {
-                    list_artists.Add(tr.Artist);
-                } else {
-                    var add = true;
-                    foreach (string artist in list_artists) {
-                        if (artist == tr.Artist) {
-                            add = false;
-                            break;
-                        }
-                    }
-                    if (add) list_artists.Add(tr.Artist);
-                }
-            }*/
         }
         private void LoadRelations() {
-            /*Relation rel;
-            for (int j = 0; j < 4; j += 2) {
-                rel = new Relation();
-                rel.First_track = list_tracks.ToArray()[j];
-                for (int i = 1; i < 11; i++) {
-                    rel.Second_tracks.Add(list_tracks.ToArray()[i]);
-                    list_relations.Add(rel);
-                }
-                list_tracks.ToArray()[j].Relation = rel;
-            }
-            list_relations.Add(list_tracks.ToArray()[0].Relation);
-            current_relation = list_tracks.ToArray()[0].Relation;
-            related_tracks = current_relation.Second_tracks;*/
+            Import import = new Import("Relations");
+            list_relations = import.GetRelations(list_tracks);
         }
         private void FillCombos() {
             combo_artist.ItemsSource = list_combo_artists;
@@ -211,7 +170,11 @@ namespace TrackRelator {
         private void combo_title_SelectionChanged(object sender, SelectionChangedEventArgs e) {
             if (!reset) {
                 track_select = true;
+
                 current_track = (Track)combo_title.SelectedItem;
+                current_relation = current_track.Relation;
+                related_tracks = current_relation.Second_tracks;
+
                 if (current_track != null) {
                     current_release = current_track.Release;
                     combo_artist.ItemsSource = list_artists.Where(artist => artist == current_track.Artist);

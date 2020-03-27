@@ -1,10 +1,10 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <Relations>
 	<Relation>
-		<First_track>List ID</First_track>
+		<First_track>10</First_track>
 		<Second_tracks>
-			<Track>List ID</Track>
-			<Track>List ID</Track>
+			<Track>12</Track>
+			<Track>33</Track>
 		</Second_tracks>
 	</Relation>
 </Relations>
