@@ -5,248 +5,55 @@ using System.Windows.Controls;
 
 namespace TrackRelator {
     public partial class MainWindow : Window {
-        private bool track_select = false;
-        private bool reset = false;
-        private Release current_release;
-        private Track current_track;
-        private string current_artist;
-        private string current_label;
+        private TrackInputHandler track_input_handler;
 
+        private TrackDatabase track_database;
         private List<Track> related_tracks;
-        private List<string> list_artists;
-        private List<Release> list_releases;
-        private List<Track> list_tracks;
-        private List<string> list_labels;
         private List<Relation> current_relations;
 
-        private List<string> list_combo_artists;
-        private List<Track> list_combo_tracks;
-        private List<Release> list_combo_releases;
-        private List<string> list_combo_labels;
         public MainWindow() {
-            reset = true;
-            list_releases = new List<Release>();
-            list_tracks = new List<Track>();
-            list_artists = new List<string>();
-            list_labels = new List<string>();
+            track_database = new TrackDatabase();
             related_tracks = new List<Track>();
             current_relations = new List<Relation>();
 
-            list_combo_tracks = new List<Track>();
-            list_combo_artists = new List<string>();
-            list_combo_releases = new List<Release>();
-            list_combo_labels = new List<string>();
-
-            LoadReleases();
-            LoadRelations();
             InitializeComponent();
-            FillCombos();
 
-            reset = false;
+            track_input_handler = new TrackInputHandler(combo_title, combo_artist, combo_label, combo_release, combo_side, button_reset, track_database);
         }
-        private void LoadReleases() {
-            Import import = new Import("Releases");
-            list_releases = import.GetReleases();
-            foreach (Release rel in list_releases) {
-                foreach (Track tr in rel.Tracks) {
-                    list_tracks.Add(tr);
-                }
-                if (list_labels.Count == 0) {
-                    list_labels.Add(rel.Label);
-                } else {
-                    var add = true;
-                    foreach (string label in list_labels) {
-                        if (label == rel.Label) {
-                            add = false;
-                            break;
-                        }
-                    }
-                    if (add) list_labels.Add(rel.Label);
-                }
-            }
-            foreach (Track tr in list_tracks) {
-                if (list_artists.Count == 0) {
-                    list_artists.Add(tr.Artist);
-                } else {
-                    var add = true;
-                    foreach (string artist in list_artists) {
-                        if (artist == tr.Artist) {
-                            add = false;
-                            break;
-                        }
-                    }
-                    if (add) list_artists.Add(tr.Artist);
-                }
-            }
-            ResetLists();
-        }
-        private void LoadRelations() {
-            Import import = new Import("Relations");
-            import.GetRelations(list_tracks);
-        }
-        private void FillCombos() {
-            combo_artist.ItemsSource = list_combo_artists;
-            combo_title.ItemsSource = list_combo_tracks;
-            combo_title.DisplayMemberPath = "Title";
-            combo_release.ItemsSource = list_combo_releases;
-            combo_release.DisplayMemberPath = "Name";
-            combo_label.ItemsSource = list_combo_labels;
-            combo_side.IsEnabled = false;
-        }
-        private void combo_artist_SelectionChanged(object sender, SelectionChangedEventArgs e) {
-            if (!reset) {
-                current_artist = (string)combo_artist.SelectedItem;
-                list_combo_releases = new List<Release>();
-                list_combo_labels = new List<string>();
-                foreach (Release rel in list_releases) {
-                    if (rel != null) {
-                        if (rel.ContainsArtist(current_artist)) {
-                            list_combo_releases.Add(rel);
-                            list_combo_labels.Add(rel.Label);
-                        }
-                    }
-                }
-                if (!track_select) {
-                    combo_title.ItemsSource = list_tracks.Where(track => track.Artist == current_artist);
-                    combo_release.ItemsSource = list_combo_releases;
-                    combo_label.ItemsSource = list_combo_labels;
-                }
-            }
-        }
-
-        private void button_reset_Click(object sender, RoutedEventArgs e) {
-            reset = true;
-            track_select = false;
-            current_artist = null;
-            current_release = null;
-            current_track = null;
-            current_label = null;
-            current_relations = null;
-            related_tracks = null;
-            data_grid.ItemsSource = related_tracks;
-            ResetLists();
-            FillCombos();
-            combo_artist.SelectedIndex = -1;
-            combo_release.SelectedIndex = -1;
-            combo_title.SelectedIndex = -1;
-            combo_side.SelectedIndex = -1;
-            combo_label.SelectedIndex = -1;
-            reset = false;
-        }
-        private void ResetLists() {
-            list_combo_releases = list_releases.OrderBy(o => o.Name).ToList();
-            list_combo_tracks = list_tracks.OrderBy(o => o.Title).ToList();
-            list_combo_labels = list_labels.OrderBy(o => o).ToList();
-            list_combo_artists = list_artists.OrderBy(o => o).ToList();
-        }
-        private void combo_release_SelectionChanged(object sender, SelectionChangedEventArgs e) {
-            if (!reset && ! track_select) {
-                current_release = (Release)combo_release.SelectedItem;
-                if (combo_release.SelectedIndex != -1) {
-                    combo_side.IsEnabled = true;
-                    list_combo_labels = new List<string>();
-                    list_combo_labels.Add(current_release.Label);
-                    combo_label.ItemsSource = list_combo_labels;
-                    combo_label.SelectedItem = current_release.Label;
-                    combo_side.IsEnabled = true;
-                    if (combo_title.SelectedIndex == -1) {
-                        combo_side.ItemsSource = current_release.GetSides();
-                        combo_artist.ItemsSource = current_release.GetArtists();
-                        if (!track_select) combo_title.ItemsSource = list_tracks.Where(track => track.Release == current_release);
-                    } else {
-                        combo_title.ItemsSource = list_tracks.Where(track => track.Release == current_release && track.Artist == current_artist);
-                        var list_combo_side = new List<string>();
-                        foreach (Track track in combo_title.ItemsSource) {
-                            list_combo_side.Add(track.Side);
-                        }
-                        combo_side.ItemsSource = list_combo_side;
-                    }
-                } else {
-                    combo_side.IsEnabled = false;
-                }
-            }
-        }
-
         private void combo_title_SelectionChanged(object sender, SelectionChangedEventArgs e) {
-            if (!reset) {
-                track_select = true;
-
-                current_track = (Track)combo_title.SelectedItem;
-                current_relations = current_track.Relations;
+            track_input_handler.TitleChanged();
+            if (track_input_handler.Current_track != null) {
+                current_relations = track_input_handler.Current_track.Relations;
+                related_tracks = new List<Track>();
                 if (current_relations != null) {
-                    related_tracks = new List<Track>();
                     foreach (Relation relation in current_relations) {
                         related_tracks.Add(relation.Second_track);
                     }
                 }
-
-                if (current_track != null) {
-                    current_release = current_track.Release;
-                    combo_artist.ItemsSource = list_artists.Where(artist => artist == current_track.Artist);
-                    combo_artist.SelectedItem = current_track.Artist;
-                    list_combo_releases = new List<Release>();
-                    list_combo_releases.Add(current_release);
-                    combo_release.ItemsSource = list_combo_releases;
-                    combo_release.SelectedItem = current_release;
-                    combo_side.IsEnabled = true;
-                    var lst = new List<string>();
-                    lst.Add(current_track.Side);
-                    combo_side.ItemsSource = lst;
-                    combo_side.SelectedItem = current_track.Side;
-                    list_combo_labels = new List<string>();
-                    list_combo_labels.Add(current_release.Label);
-                    combo_label.ItemsSource = list_combo_labels;
-                    combo_label.SelectedItem = current_release.Label;
-                    current_relations = current_track.Relations;
-                    if (current_relations != null) {
-                        data_grid.ItemsSource = related_tracks;
-                    } else {
-                        related_tracks = new List<Track>();
-                        data_grid.ItemsSource = related_tracks;
-                    }
-                }
+                data_grid.ItemsSource = related_tracks;
             }
-            track_select = false;
         }
-
+        private void combo_artist_SelectionChanged(object sender, SelectionChangedEventArgs e) {
+            track_input_handler.ArtistChanged();
+        }
         private void combo_label_SelectionChanged(object sender, SelectionChangedEventArgs e) {
-            if (!reset && !track_select) {
-                current_label = (string)combo_label.SelectedItem;
-                combo_release.ItemsSource = list_releases.Where(release => release.Label == current_label);
-                combo_title.ItemsSource = list_tracks.Where(track => track.Release.Label == current_label);
-                var list_combo_artists = new List<string>();
-                foreach (Track tr in combo_title.ItemsSource) {
-                    if (list_combo_artists.Count == 0) {
-                        list_combo_artists.Add(tr.Artist);
-                    } else {
-                        var add = true;
-                        foreach (string artist in list_combo_artists) {
-                            if (artist == tr.Artist) {
-                                add = false;
-                                break;
-                            }
-                        }
-                        if (add) list_combo_artists.Add(tr.Artist);
-                    }
-                }
-                combo_artist.ItemsSource = list_combo_artists;
-            }
+            track_input_handler.LabelChanged();
         }
-
+        private void combo_release_SelectionChanged(object sender, SelectionChangedEventArgs e) {
+            track_input_handler.ReleaseChanged();
+        }
         private void combo_side_SelectionChanged(object sender, SelectionChangedEventArgs e) {
-            if (!reset && !track_select) {
-                var current_side = (string)combo_side.SelectedItem;
-                if (combo_title.SelectedIndex == -1 || combo_artist.SelectedIndex == -1) {
-                    var list_combo_artists = new List<string>();
-                    foreach (Track tr in current_release.Tracks) {
-                        if (tr.Side == current_side) list_combo_artists.Add(tr.Artist);
-                    }
-                    combo_artist.ItemsSource = list_combo_artists;
-                    combo_artist.SelectedIndex = 0;
-                    combo_title.ItemsSource = current_release.Tracks.Where(track => track.Side == current_side);
-                    combo_title.SelectedIndex = 0;
-                }
-            }
+            track_input_handler.SideChanged();
+        }
+        private void button_reset_Click(object sender, RoutedEventArgs e) {
+            track_input_handler.Reset();
+            current_relations = null;
+            related_tracks = null;
+            data_grid.ItemsSource = related_tracks;
+        }
+        private void button_relation_Click(object sender, RoutedEventArgs e) {
+            CreateRelation relation_window = new CreateRelation(this, track_database);
+            relation_window.Show();
         }
     }
 }
