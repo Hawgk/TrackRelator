@@ -8,6 +8,7 @@ namespace TrackRelator {
         public List<Release> List_releases { get; set; }
         public List<Track> List_tracks { get; set; }
         public List<string> List_labels { get; set; }
+        public List<Relation> List_relations { get; set; }
         public TrackDatabase() {
             List_releases = new List<Release>();
             List_tracks = new List<Track>();
@@ -54,6 +55,20 @@ namespace TrackRelator {
         private void LoadRelations() {
             Import import = new Import("Relations");
             import.GetRelations(List_tracks);
+        }
+        public void SaveReleases() {
+            Export export = new Export();
+            export.SaveToFile(List_releases);
+        }
+        public void SaveRelations() {
+            List_relations = new List<Relation>();
+            foreach (Track tr in List_tracks) {
+                foreach (Relation rel in tr.Relations) {
+                    List_relations.Add(rel);
+                }
+            }
+            Export export = new Export();
+            export.SaveToFile(List_relations);
         }
     }
 }

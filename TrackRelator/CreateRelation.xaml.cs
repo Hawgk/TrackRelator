@@ -67,7 +67,9 @@ namespace TrackRelator {
             relation.First_track = track_2.Current_track;
             relation.Second_track = track_1.Current_track;
             relation.First_track.Relations.Add(relation);
+            track_database.SaveRelations();
             this.Close();
+            MessageBox.Show("Successfully saved!");
         }
         private void button_cancel_Click(object sender, RoutedEventArgs e) {
             this.Close();

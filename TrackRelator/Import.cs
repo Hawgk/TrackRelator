@@ -47,11 +47,6 @@ namespace TrackRelator {
                 relation.First_track = tracks.Where(track => track.Id == Id_0).ToArray()[0];
                 relation.Second_track = tracks.Where(track => track.Id == Id_1).ToArray()[0];
                 relation.First_track.Relations.Add(relation);
-
-                relation = new Relation();
-                relation.First_track = tracks.Where(track => track.Id == Id_1).ToArray()[0];
-                relation.Second_track = tracks.Where(track => track.Id == Id_0).ToArray()[0];
-                relation.First_track.Relations.Add(relation);
             }
         }
     }

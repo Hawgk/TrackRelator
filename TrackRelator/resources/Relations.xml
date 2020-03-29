@@ -1,11 +1,27 @@
-﻿<?xml version="1.0" encoding="utf-8" ?>
-<Relations>
-	<Relation>
-		<First_track>10</First_track>
-		<Second_track>12</Second_track>
-	</Relation>
-	<Relation>
-		<First_track>10</First_track>
-		<Second_track>33</Second_track>
-	</Relation>
-</Relations>
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Releases>
+  <Relation>
+    <First_track>10</First_track>
+    <Second_track>12</Second_track>
+  </Relation>
+  <Relation>
+    <First_track>10</First_track>
+    <Second_track>33</Second_track>
+  </Relation>
+  <Relation>
+    <First_track>12</First_track>
+    <Second_track>10</Second_track>
+  </Relation>
+  <Relation>
+    <First_track>33</First_track>
+    <Second_track>10</Second_track>
+  </Relation>
+  <Relation>
+    <First_track>33</First_track>
+    <Second_track>40</Second_track>
+  </Relation>
+  <Relation>
+    <First_track>40</First_track>
+    <Second_track>33</Second_track>
+  </Relation>
+</Releases>

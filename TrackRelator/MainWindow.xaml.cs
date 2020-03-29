@@ -55,5 +55,10 @@ namespace TrackRelator {
             CreateRelation relation_window = new CreateRelation(this, track_database);
             relation_window.Show();
         }
+
+        private void button_add_release_Click(object sender, RoutedEventArgs e) {
+            AddRelease add_release_window = new AddRelease(this, track_database);
+            add_release_window.Show();
+        }
     }
 }
