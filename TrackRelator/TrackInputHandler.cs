@@ -79,7 +79,8 @@ namespace TrackRelator {
                         }
                     }
                 }
-                combo_title.ItemsSource = track_database.List_tracks.Where(track => track.Artist == Current_artist).ToList();
+                list_combo_tracks = (List<Track>)combo_title.ItemsSource;
+                combo_title.ItemsSource = list_combo_tracks.Where(track => track.Artist == Current_artist).ToList();
                 combo_release.ItemsSource = list_combo_releases;
                 combo_label.ItemsSource = list_combo_labels;
             }
@@ -87,8 +88,8 @@ namespace TrackRelator {
         public void LabelChanged() {
             if (!reset && !track_select) {
                 current_label = (string)combo_label.SelectedItem;
-                combo_release.ItemsSource = track_database.List_releases.Where(release => release.Label == current_label);
-                combo_title.ItemsSource = track_database.List_tracks.Where(track => track.Release.Label == current_label);
+                combo_release.ItemsSource = track_database.List_releases.Where(release => release.Label == current_label).ToList();
+                combo_title.ItemsSource = track_database.List_tracks.Where(track => track.Release.Label == current_label).ToList();
                 var list_combo_artists = new List<string>();
                 foreach (Track tr in combo_title.ItemsSource) {
                     if (list_combo_artists.Count == 0) {
@@ -120,9 +121,9 @@ namespace TrackRelator {
                     if (combo_title.SelectedIndex == -1) {
                         combo_side.ItemsSource = Current_release.GetSides();
                         combo_artist.ItemsSource = Current_release.GetArtists();
-                        if (!track_select) combo_title.ItemsSource = track_database.List_tracks.Where(track => track.Release == Current_release);
+                        if (!track_select) combo_title.ItemsSource = track_database.List_tracks.Where(track => track.Release == Current_release).ToList();
                     } else {
-                        combo_title.ItemsSource = track_database.List_tracks.Where(track => track.Release == Current_release && track.Artist == Current_artist);
+                        combo_title.ItemsSource = track_database.List_tracks.Where(track => track.Release == Current_release && track.Artist == Current_artist).ToList();
                         var list_combo_side = new List<string>();
                         foreach (Track track in combo_title.ItemsSource) {
                             list_combo_side.Add(track.Side);
@@ -144,7 +145,7 @@ namespace TrackRelator {
                 }
                 combo_artist.ItemsSource = list_combo_artists;
                 combo_artist.SelectedIndex = 0;
-                combo_title.ItemsSource = Current_release.Tracks.Where(track => track.Side == current_side);
+                combo_title.ItemsSource = Current_release.Tracks.Where(track => track.Side == current_side).ToList();
                 combo_title.SelectedIndex = 0;
                 side_select = false;
             }
