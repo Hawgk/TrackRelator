@@ -23,4 +23,10 @@
     </None>
   </ItemGroup>
 
+  <ItemGroup>
+    <Page Update="CreateRelation - Copy.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+  </ItemGroup>
+
 </Project>

@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 
@@ -61,6 +60,11 @@ namespace TrackRelator {
             AddRelease add_release_window = new AddRelease(this, track_database);
             add_release_window.Show();
             track_input_handler.Reset();
+        }
+
+        private void button_delete_release_Click(object sender, RoutedEventArgs e) {
+            DeleteRelease delete_window = new DeleteRelease(this, track_database);
+            delete_window.Show();
         }
     }
 }

@@ -1,11 +1,11 @@
-﻿<Window x:Class="TrackRelator.MainWindow"
+﻿<Window x:Class="TrackRelator.DeleteRelease"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:TrackRelator"
         mc:Ignorable="d"
-        Title="TrackRelator" Height="410" Width="1036" Icon="/icon.png" WindowStartupLocation="CenterScreen" WindowState="Maximized" ResizeMode="CanMinimize" SizeToContent="Manual">
+        Title="DeleteRelease" Height="172.8" Width="927">
     <Grid>
         <ComboBox x:Name="combo_artist" HorizontalAlignment="Left" Margin="73,37,0,0" VerticalAlignment="Top" Width="400" Height="22" SelectionChanged="combo_artist_SelectionChanged"/>
         <ComboBox x:Name="combo_title" HorizontalAlignment="Left" Margin="73,10,0,0" VerticalAlignment="Top" Width="400" Height="22" SelectionChanged="combo_title_SelectionChanged"/>
@@ -13,21 +13,12 @@
         <ComboBox x:Name="combo_side" HorizontalAlignment="Left" Margin="73,64,0,0" VerticalAlignment="Top" Width="70" Height="22" SelectionChanged="combo_side_SelectionChanged"/>
         <TextBlock HorizontalAlignment="Left" Margin="10,39,0,0" Text="Artist:" TextWrapping="Wrap" VerticalAlignment="Top"/>
         <TextBlock HorizontalAlignment="Left" Margin="10,13,0,0" Text="Track title:" TextWrapping="Wrap" VerticalAlignment="Top"/>
-        <TextBlock HorizontalAlignment="Left" Margin="483,40,0,0" Text="Release:" TextWrapping="Wrap" VerticalAlignment="Top"/>
         <TextBlock HorizontalAlignment="Left" Margin="10,67,0,0" Text="Side:" TextWrapping="Wrap" VerticalAlignment="Top"/>
-        <Button x:Name="button_add_release" Content="Add Release" Margin="0,37,10,0" VerticalAlignment="Top" Height="22" HorizontalAlignment="Right" Width="120" Click="button_add_release_Click"/>
-        <Button x:Name="button_delete_release" Content="Delete Release" Margin="0,64,10,0" VerticalAlignment="Top" Height="22" HorizontalAlignment="Right" Width="120" Click="button_delete_release_Click"/>
-        <DataGrid x:Name="data_grid" AutoGenerateColumns="False" Margin="0,96,0,0" ColumnWidth="*" IsReadOnly="True" CanUserAddRows="False" CanUserDeleteRows="False" CanUserResizeColumns="False" CanUserResizeRows="False" CanUserReorderColumns="False" FontWeight="Normal" FontStyle="Normal">
-            <DataGrid.Columns>
-                <DataGridTextColumn Header="Title" Binding="{Binding Title}" Width=".45*"/>
-                <DataGridTextColumn Header="Artist" Binding="{Binding Artist}" Width=".3*"/>
-                <DataGridTextColumn Header="Release" Binding="{Binding Release.Name}" Width=".1*"/>
-                <DataGridTextColumn Header="Side" Binding="{Binding Side}" Width=".05*"/>
-            </DataGrid.Columns>
-        </DataGrid>
-        <Button x:Name="button_relation" Content="Add Relation" Margin="0,10,10,0" VerticalAlignment="Top" Height="22" HorizontalAlignment="Right" Width="120" Click="button_relation_Click"/>
         <Button x:Name="button_reset" Content="Reset" HorizontalAlignment="Left" Margin="796,10,0,0" VerticalAlignment="Top" Height="22" Width="85" Click="button_reset_Click"/>
         <ComboBox x:Name="combo_label" HorizontalAlignment="Left" Margin="536,10,0,0" VerticalAlignment="Top" Width="250" Height="22" SelectionChanged="combo_label_SelectionChanged"/>
+        <Button x:Name="button_delete" Content="Delete" HorizontalAlignment="Left" Margin="10,96,0,0" VerticalAlignment="Top" Height="22" Width="85" Click="button_delete_Click"/>
+        <Button x:Name="button_cancel" Content="Cancel" HorizontalAlignment="Left" Margin="105,96,0,0" VerticalAlignment="Top" Height="22" Width="85" IsCancel="True" Click="button_cancel_Click"/>
+        <TextBlock HorizontalAlignment="Left" Margin="483,40,0,0" Text="Release:" TextWrapping="Wrap" VerticalAlignment="Top"/>
         <TextBlock HorizontalAlignment="Left" Margin="483,13,0,0" Text="Label:" TextWrapping="Wrap" VerticalAlignment="Top"/>
 
     </Grid>

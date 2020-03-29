@@ -1,7 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Windows.Controls;
 
 namespace TrackRelator {
@@ -45,9 +43,10 @@ namespace TrackRelator {
                 Current_track = (Track)combo_title.SelectedItem;
 
                 if (Current_track != null) {
+                    Current_artist = Current_track.Artist;
                     Current_release = Current_track.Release;
                     combo_artist.ItemsSource = track_database.List_artists.Where(artist => artist == Current_track.Artist).ToList();
-                    combo_artist.SelectedItem = Current_track.Artist;
+                    combo_artist.SelectedItem = Current_artist;
                     list_combo_releases = new List<Release>();
                     list_combo_releases.Add(Current_release);
                     combo_release.ItemsSource = list_combo_releases;

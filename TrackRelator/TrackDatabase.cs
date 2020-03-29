@@ -1,6 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System.Collections.Generic;
+using System.Linq;
 
 namespace TrackRelator {
     public class TrackDatabase {
@@ -55,6 +54,31 @@ namespace TrackRelator {
         private void LoadRelations() {
             Import import = new Import("Relations");
             import.GetRelations(List_tracks);
+        }
+        public void DeleteTrack(Track track) {
+            List_tracks = List_tracks.Where(tr => tr != track).ToList();
+            List_releases = new List<Release>();
+            foreach (Track tr in List_tracks) {
+                if (List_releases.Count == 0) {
+                    List_releases.Add(tr.Release);
+                } else {
+                    var add = true;
+                    foreach (Release rel in List_releases) {
+                        if (rel == tr.Release) {
+                            add = false;
+                            break;
+                        }
+                    }
+                    if (add) {
+                        List_releases.Add(tr.Release);
+                    }
+                }
+            }
+            SaveReleases();
+        }
+        public void DeleteRelease(Release release) {
+            List_releases = List_releases.Where(rel => rel != release).ToList();
+            SaveReleases();
         }
         public void SaveReleases() {
             Export export = new Export();
