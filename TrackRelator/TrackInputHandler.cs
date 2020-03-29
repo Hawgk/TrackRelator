@@ -175,7 +175,7 @@ namespace TrackRelator {
             combo_label.SelectedIndex = -1;
             reset = false;
         }
-        private void ResetLists() {
+        public void ResetLists() {
             list_combo_releases = track_database.List_releases.OrderBy(o => o.Name).ToList();
             list_combo_tracks = track_database.List_tracks.OrderBy(o => o.Title).ToList();
             list_combo_labels = track_database.List_labels.OrderBy(o => o).ToList();
