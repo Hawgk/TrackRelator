@@ -65,6 +65,7 @@ namespace TrackRelator {
         private void button_delete_release_Click(object sender, RoutedEventArgs e) {
             DeleteRelease delete_window = new DeleteRelease(this, track_database);
             delete_window.Show();
+            track_input_handler.Reset();
         }
     }
 }
