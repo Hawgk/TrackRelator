@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:TrackRelator"
         mc:Ignorable="d"
-        Title="AddTrack" Height="167" Width="813" Icon="/icon.png">
+        Title="AddTrack" Height="167" Width="813" Icon="/resources/icon.ico" ResizeMode="NoResize" WindowStartupLocation="CenterOwner">
     <Grid>
         <TextBlock HorizontalAlignment="Left" Margin="10,40,0,0" Text="Artist:" TextWrapping="Wrap" VerticalAlignment="Top"/>
         <TextBlock HorizontalAlignment="Left" Margin="10,13,0,0" Text="Track title:" TextWrapping="Wrap" VerticalAlignment="Top"/>

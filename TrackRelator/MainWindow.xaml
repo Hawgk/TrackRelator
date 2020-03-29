@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:TrackRelator"
         mc:Ignorable="d"
-        Title="TrackRelator" Height="410" Width="1036" Icon="/icon.png" WindowStartupLocation="CenterScreen" WindowState="Maximized" ResizeMode="CanMinimize" SizeToContent="Manual">
+        Title="TrackRelator" Height="410" Width="1036" Icon="/resources/icon.ico" WindowStartupLocation="CenterScreen" WindowState="Maximized" ResizeMode="CanMinimize" SizeToContent="Manual">
     <Grid>
         <ComboBox x:Name="combo_artist" HorizontalAlignment="Left" Margin="73,37,0,0" VerticalAlignment="Top" Width="400" Height="22" SelectionChanged="combo_artist_SelectionChanged"/>
         <ComboBox x:Name="combo_title" HorizontalAlignment="Left" Margin="73,10,0,0" VerticalAlignment="Top" Width="400" Height="22" SelectionChanged="combo_title_SelectionChanged"/>

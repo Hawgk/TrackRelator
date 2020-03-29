@@ -4,14 +4,17 @@
     <OutputType>WinExe</OutputType>
     <TargetFramework>netcoreapp3.1</TargetFramework>
     <UseWPF>true</UseWPF>
+    <ApplicationIcon>resources\icon.ico</ApplicationIcon>
   </PropertyGroup>
 
   <ItemGroup>
-    <None Remove="icon.png" />
+    <None Remove="resources\icon.ico" />
   </ItemGroup>
 
   <ItemGroup>
-    <Resource Include="icon.png" />
+    <Resource Include="resources\icon.ico">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
   </ItemGroup>
 
   <ItemGroup>
